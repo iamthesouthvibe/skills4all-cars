@@ -39,6 +39,43 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
+
+    public function findByWord($name, $categorie){
+
+
+        if ($name != '') {
+            $query = $this->createQueryBuilder('c')
+            ->where('c.name LIKE :key')
+            ->setParameter('key' , '%'.$name.'%')
+            ; 
+        }
+
+
+        if ($categorie != '') {
+            $query = $this->createQueryBuilder('c')
+                ->select('c, t')
+                ->join('c.carCategory', 't')
+                ->andWhere('t.name = :carCategory')
+                ->setParameter('carCategory', $categorie)
+            ;
+        }
+
+
+        if ($name != '' && $categorie != '') {
+            $query = $this->createQueryBuilder('c')
+                ->select('c, t')
+                ->join('c.carCategory', 't')
+                ->where('t.name = :carCategory AND c.name LIKE :key')
+                ->setParameter('carCategory', $categorie)
+                ->setParameter('key' , '%'.$name.'%')
+            ;
+        }
+
+
+            return $query->getQuery()->getResult();
+    }
+
+
 //    /**
 //     * @return Car[] Returns an array of Car objects
 //     */

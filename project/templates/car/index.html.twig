@@ -3,4 +3,47 @@
 {% block title %}Hello CarController!
 {% endblock %}
 
-{% block body %}{% endblock %}
+{% block body %}
+	<div class="container">
+		{{ form_start(form, { 'attr': {'class': 'row row-cols-lg-auto g-3 align-items-center mt-5'} })}}
+		<div class="col-4">
+			<div class="form-group">
+				{{ form_row(form.name) }}
+			</div>
+		</div>
+		<div class="col-4">
+			<div class="form-group">
+				{{ form_row(form.carCategory) }}
+			</div>
+		</div>
+		<div class="col-4">
+			{{ form_row(form.Register, { 'label': 'Search' }) }}
+		</div>
+		<div class="col-4">
+			{{ form_errors(form) }}
+		</div>
+		{{ form_end(form) }}
+
+
+		<h2 class="mt-5">{{ cars.getTotalItemCount }}
+			cars</h2>
+		<div class="d-flex flex-wrap justify-content-between mt-5">
+			{% for car in cars %}
+				<div class="card mb-3" style="width: 16rem;">
+					<div class="card-body">
+						<h5 class="card-title">{{ car.name }}</h5>
+						<h6 class="card-subtitle mb-2 text-muted">{{ car.carCategory.name }}</h6>
+						<p class="card-text">{{ car.nbDoors}}
+							Doors</p>
+						<p class="card-text">{{ car.nbSeats}}
+							Seats</p>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="d-flex justify-content-center">
+			{{ knp_pagination_render(cars) }}
+		</div>
+	</div>
+
+{% endblock %}

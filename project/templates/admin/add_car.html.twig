@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminController!
+{% endblock %}
+
+{% block body %}
+
+	<div class="container">
+
+		<h1 class="mt-5">Add car</h1>
+		{{ form_start(form)}}
+		<div class="my-custom-class-for-errors">
+			{{ form_errors(form) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.name) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.carCategory) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.nbSeats) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.nbDoors) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.cost) }}
+		</div>
+
+		<div class="form-group">
+			{{ form_row(form.save) }}
+		</div>
+
+		{{ form_end(form) }}
+
+	</div>
+
+{% endblock %}

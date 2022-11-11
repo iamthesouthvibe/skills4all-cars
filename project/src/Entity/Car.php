@@ -25,6 +25,12 @@ class Car
     #[ORM\Column]
     private ?int $nbSeats = null;
 
+    #[ORM\ManyToOne(inversedBy: 'cars')]
+    private ?CarCategory $carCategory = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,4 +83,29 @@ class Car
 
         return $this;
     }
+
+    public function getCarCategory(): ?CarCategory
+    {
+        return $this->carCategory;
+    }
+
+    public function setCarCategory(?CarCategory $carCategory): self
+    {
+        $this->carCategory = $carCategory;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
 }
